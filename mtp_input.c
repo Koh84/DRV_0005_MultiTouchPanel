@@ -25,6 +25,7 @@
 #define MTP_NAME "ft5x0x_ts"
 #define MTP_MAX_ID 15
 
+
 struct input_dev *ts_dev;
 static struct work_struct mtp_work;
 static struct i2c_client *mtp_client;
