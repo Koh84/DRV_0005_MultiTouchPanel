@@ -25,7 +25,6 @@
 #define MTP_NAME "ft5x0x_ts"
 #define MTP_MAX_ID 15
 
-
 struct input_dev *ts_dev;
 static struct work_struct mtp_work;
 static struct i2c_client *mtp_client;
@@ -169,6 +168,7 @@ static int __devinit mtp_probe(struct i2c_client *client,
 	/* what type of events */
 	set_bit(EV_SYN, ts_dev->evbit); //sync event
 	set_bit(EV_ABS, ts_dev->evbit); //absolute positioning
+	set_bit(INPUT_PROP_DIRECT, ts_dev->propbit);
 
 	/* what type of sub-events */
 	set_bit(ABS_MT_TRACKING_ID, ts_dev->absbit);
@@ -205,6 +205,7 @@ static int __devexit mtp_remove(struct i2c_client *client)
 
 static const struct i2c_device_id mtp_id_table[] = {
 	{ "KelvinKoh_mtp", 0 },
+	{ "ft5x0x_ts", 0 }, /*we can use this if we decided not to comment out i2c_register_board_info(1, i2c_devs1, ....) in Mach-tiny4412.c where */  
 	{}
 };
 
